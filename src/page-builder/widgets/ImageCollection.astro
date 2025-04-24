@@ -1,0 +1,45 @@
+---
+import type { ImageCollectionType } from '@checkpoint/shared-types';
+
+interface Props {
+  data: ImageCollectionType;
+}
+
+const { data } = Astro.props as Props;
+
+const getCollectionJustify = (justify: ImageCollectionType['justify_content']) => {
+  switch (justify) {
+    case 'center':
+      return 'justify-center';
+    case 'around':
+      return 'justify-around';
+    case 'between':
+      return 'justify-between';
+    default:
+      return 'justify-center';
+  }
+};
+---
+
+<section aria-label="Image Collection" class="py-4 px-24">
+  <h2>{data.title}</h2>
+  <ul
+    class:list={[
+      `w-full flex ${getCollectionJustify(data.justify_content)} gap-15 flex-wrap`,
+      {
+        "grayscale": data.gray_scale,
+      },
+    ]}
+  >
+    {
+      data.images.map((image) => {
+        const filePath = `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${image.directus_files_id.filename_disk}`;
+        return (
+          <li>
+            <img src={filePath} alt="" />
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

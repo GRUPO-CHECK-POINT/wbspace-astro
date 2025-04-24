@@ -1,14 +1,24 @@
 {
-  "name": "template-",
+  "name": "wbspace-astro-template",
+  "version": "0.1.0",
   "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+  "exports": {
+    "./components/Button.astro": "./src/components/Button.astro",
+    "./components/Card": "./src/components/Card.tsx",
+    "./index": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "peerDependencies": {
+    "astro": "^4.0.0",
+    "react": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "vite": "^6.3.3"
   },
   "dependencies": {
-    "astro": "^5.7.5"
+    "@directus/sdk": "^19.1.0"
   }
 }

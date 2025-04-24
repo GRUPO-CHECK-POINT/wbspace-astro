@@ -1,0 +1,28 @@
+---
+import  Widget  from './Widget.astro';
+
+const { page, CustomWidgets, overrideWidgetList } = Astro.props;
+
+const isDevelopment = process.env.NODE_ENV === 'development';
+---
+
+<div class="page-builder">
+  <!-- {isDevelopment && <pre>{JSON.stringify(page.blocks, null, 2)}</pre>} -->
+
+  {
+    page.blocks.map(async (block: any) => {
+      if (
+        CustomWidgets &&
+        (overrideWidgetList.includes(block.collection) || block.collection === 'custom_widget')
+      ) {
+        return (
+          <CustomWidgets
+            name={block.collection === 'custom_widget' ? block.item.name : block.collection}
+            data={block.item}
+          />
+        );
+      }
+      return <Widget collectionName={block.collection} data={block.item} />;
+    })
+  }
+</div>

@@ -1,0 +1,164 @@
+---
+import type { Button, SeparatorWidgetType } from '@checkpoint/shared-types';
+
+interface Props {
+  data: SeparatorWidgetType;
+}
+
+const { data } = Astro.props as Props;
+
+const getButtonColor = (buttonColor: Button['button_color']): string => {
+  switch (buttonColor) {
+    case 'neutral':
+      return 'btn-neutral';
+    case 'primary':
+      return 'btn-primary';
+    case 'secondary':
+      return 'btn-secondary';
+    case 'accent':
+      return 'btn-accent';
+    case 'info':
+      return 'btn-info';
+    case 'success':
+      return 'btn-success';
+    case 'warning':
+      return 'btn-warning';
+    case 'error':
+      return 'btn-error';
+    default:
+      return 'btn';
+  }
+};
+
+const getButtonStyle = (buttonStyle: Button['button_style']): string => {
+  switch (buttonStyle) {
+    case 'outline':
+      return 'btn-outline';
+    case 'dash':
+      return 'btn-dashed';
+    case 'soft':
+      return 'btn-soft';
+    case 'ghost':
+      return 'btn-ghost';
+    case 'link':
+      return 'btn-link';
+    default:
+      return '';
+  }
+};
+
+const getDisplayOrientation = (
+  displayOrientation: SeparatorWidgetType['display_orientation']
+): string => {
+  switch (displayOrientation) {
+    case 'normal':
+      return 'md:flex-row';
+    case 'reverse':
+      return 'md:flex-row-reverse';
+    default:
+      return 'md:flex-row';
+  }
+};
+
+const getColorSchema = (colorSchema: SeparatorWidgetType['color_schema']): string => {
+  switch (colorSchema) {
+    case 'none':
+      return 'bg-base-100 border border-b-4 text-base-content';
+    case 'base':
+      return 'bg-base-200 text-base-content';
+    case 'primary':
+      return 'bg-primary text-primary-content';
+    case 'secondary':
+      return 'bg-secondary text-secondary-content border-2 border-b-4 border-base-content';
+    case 'accent':
+      return 'bg-accent text-secondary-content';
+    case 'neutral':
+      return 'bg-neutral text-neutral-content';
+    case 'info':
+      return 'bg-info text-info-content';
+    case 'success':
+      return 'bg-success text-success-content';
+    case 'warning':
+      return 'bg-warning text-warning-content';
+    case 'error':
+      return 'bg-error text-error-content';
+    default:
+      return 'bg-base-200 text-base-content';
+  }
+};
+
+
+const getHighlitedTextColor = (colorSchema: SeparatorWidgetType['color_schema']): string => {
+  switch (colorSchema) {
+    case 'none':
+      return 'bg-base-content text-base';
+    case 'base':
+      return 'bg-base-content text-base';
+    case 'primary':
+      return 'bg-primary-content text-primary';
+    case 'secondary':
+      return 'bg-secondary-content text-secondary';
+    case 'accent':
+      return 'bg-accent-content text-accent';
+    case 'neutral':
+      return 'bg-neutral-content text-neutral';
+    case 'info':
+      return 'bg-info-content text-info';
+    case 'success':
+      return 'bg-success-content text-success';
+    case 'warning':
+      return 'bg-warning-content text-warning';
+    case 'error':
+      return 'bg-error-content text-error';
+    default:
+      return 'bg-base-content text-base';
+  }
+};
+---
+
+<section class="px-24">
+  <div
+    class:list={[
+      `${getColorSchema(data.color_schema)} ${data.image?.filename_disk ? 'py-8' : 'py-20'} px-14 rounded-box flex flex-col ${getDisplayOrientation(data.display_orientation)} items-center justify-between gap-12`,
+    ]}
+  >
+    <div
+      class={`flex flex-col gap-7 ${data.highlight_content === 'none' ? 'w-full' : data.highlight_content === 'text' ? 'w-3/4' : 'w-2/5'}`}
+    >
+      <h3 class="font-medium text-3xl">{data.headline}</h3>
+      <p class="text-lg text-balance">{data.content}</p>
+      {
+        data.buttons &&
+          data.buttons.map((button) => (
+            <a
+              href={button.href}
+              class={`btn w-fit ${getButtonColor(button.button_color)} ${getButtonStyle(button.button_style)}`}
+            >
+              {button.label}
+            </a>
+          ))
+      }
+    </div>
+    {
+      data.image && data.highlight_content === 'image' && (
+        <div class="w-2/5">
+          <img
+            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.image.filename_disk}`}
+            class="mx-auto my-5"
+            alt=""
+          />
+        </div>
+      )
+    }
+    {
+      data.highlighted_text && data.highlight_content === 'text' && (
+        <div class="w-1/4 flex gap-8">
+          <div class="size-8 rounded-full bg-secondary shrink-0"></div>
+          <p class={`text-3xl! p-1 rounded-md font-semibold text-balance ${getHighlitedTextColor(data.color_schema)}`}>
+            {data.highlighted_text}
+          </p>
+        </div>
+      )
+    }
+  </div>
+</section>

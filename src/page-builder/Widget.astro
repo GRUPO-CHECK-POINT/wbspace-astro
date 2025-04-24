@@ -1,0 +1,25 @@
+---
+import RichTextWidget from './widgets/RichTextWidget';
+import HeroWidget from './widgets/HeroWidget';
+import ImageBlock from './widgets/ImageBlock';
+import CardGroup from './widgets/CardGroup.astro';
+import ImageCollection from './widgets/ImageCollection.astro';
+import SeparatorWidget from './widgets/SeparatorWidget.astro';
+import FooterWidget from './widgets/FooterWidget.astro';
+import NavBar from './widgets/NavBar.astro';
+import TimelineWidget from './widgets/TimelineWidget.astro';
+import GridWidget from './widgets/GridWidget.astro';
+
+const { collectionName, data } = Astro.props;
+---
+
+{collectionName === 'rich_text' && <RichTextWidget data={data} />}
+{collectionName === 'hero' && <HeroWidget data={data} />}
+{collectionName === 'image_block' && <ImageBlock data={data} />}
+{collectionName === 'separator_block' && <SeparatorWidget data={data} />}
+{collectionName === 'image_collection' && <ImageCollection data={data} />}
+{collectionName === 'card_group' && <CardGroup data={data} />}
+{collectionName === 'footer' && <FooterWidget data={data} />}
+{collectionName === 'navbar' && <NavBar data={data} />}
+{collectionName === 'timeline_widget' && <TimelineWidget data={data} />}
+{collectionName === 'grid_widget' && <GridWidget data={data} />}

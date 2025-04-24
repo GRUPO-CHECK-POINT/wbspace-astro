@@ -1,0 +1,16 @@
+---
+import type {CustomWidgetType} from "../types"
+
+interface Props {
+  name: string;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  data: CustomWidgetType<any>;
+}
+
+const { name, data } = Astro.props as Props;
+
+export const overrideWidgetList = [];
+---
+<!-- 
+{name === 'first_custom' && <FirstCustom client:load />}
+{name === 'information' && <Information data={data} />} -->

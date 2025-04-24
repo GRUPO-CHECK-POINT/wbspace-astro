@@ -1,0 +1,55 @@
+---
+import type { FooterType } from '@checkpoint/shared-types';
+
+interface Props {
+  data: FooterType;
+}
+
+const { data } = Astro.props as Props;
+---
+
+<footer class="bg-primary flex flex-col gap-16 text-primary-content rounded-t-box px-24 py-18">
+  <div class="flex items-center justify-between">
+    <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.page_info.logo_light?.filename_disk}`} alt="" />
+    <nav class="flex gap-5">
+      {
+        data.navigation_items.map((ni) => (
+          <a class="underline text-lg" href={`/${ni.navigation_items_id.slug}`}>
+            {ni.navigation_items_id.text}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="min-w-1/5"></div>
+  </div>
+  <div class="flex justify-between">
+    <div class="flex flex-col gap-6 w-1/4">
+      <span class="bg-secondary text-secondary-content text-xl font-medium p-2 rounded-md w-fit"
+        >Contact us:</span
+      >
+      <div class="flex flex-col gap-5">
+        {data.page_info.email && <p>Email: {data.page_info.email}</p>}
+        {data.page_info.contact_phone && <p>Phone: {data.page_info.contact_phone}</p>}
+        {
+          data.page_info.contact_address && (
+            <p class="text-balance">Address: {data.page_info.contact_address}</p>
+          )
+        }
+      </div>
+    </div>
+    <form class="bg-[#292A32] px-10 py-14 w-1/2 flex items-center rounded-[14px]">
+      <fieldset class="flex gap-5 justify-center">
+        <input
+          type="email"
+          placeholder="Email"
+          class="input bg-transparent border-base-100 text-base-100 input-bordered text-xl py-5 px-9 h-auto w-1/2"
+        />
+        <button class="btn btn-secondary text-xl py-5 px-9 h-auto">Subscribe to news</button>
+      </fieldset>
+    </form>
+  </div>
+  <hr />
+  <div>
+    <span class="text-lg">© {new Date().getFullYear()} Positivus. All Rights Reserved.</span>
+  </div>
+</footer>
