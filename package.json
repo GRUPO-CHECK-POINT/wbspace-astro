@@ -12,13 +12,22 @@
   ],
   "peerDependencies": {
     "astro": "^4.0.0",
-    "react": "^18.0.0"
+    "react": "^19.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
+    "daisyui": "^5.0.28",
     "vite": "^6.3.3"
   },
   "dependencies": {
-    "@directus/sdk": "^19.1.0"
+    "@astrojs/react": "^4.2.5",
+    "@directus/sdk": "^19.1.0",
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "dompurify": "^3.2.5",
+    "jsdom": "^26.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.4"
   }
 }

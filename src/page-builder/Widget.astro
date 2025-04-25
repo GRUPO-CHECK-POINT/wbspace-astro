@@ -14,7 +14,7 @@ const { collectionName, data } = Astro.props;
 ---
 
 {collectionName === 'rich_text' && <RichTextWidget data={data} />}
-{collectionName === 'hero' && <HeroWidget data={data} />}
+{collectionName === 'hero_widget' && <HeroWidget data={data} />}
 {collectionName === 'image_block' && <ImageBlock data={data} />}
 {collectionName === 'separator_block' && <SeparatorWidget data={data} />}
 {collectionName === 'image_collection' && <ImageCollection data={data} />}

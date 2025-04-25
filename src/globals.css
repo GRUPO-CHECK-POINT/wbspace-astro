@@ -1,1 +1,82 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+	name: "default-theme";
+	default: false;
+	prefersdark: false;
+	color-scheme: "light";
+	--color-base-100: oklch(1 0 0);
+	--color-base-200: oklch(96.42% 0 0);
+	--color-base-300: oklch(96.42% 0 0);
+	--color-base-content: oklch(22.09% 0.0176 279.88);
+	--color-primary: oklch(22.09% 0.0176 279.88);
+	--color-primary-content: oklch(100% 0 0);
+	--color-secondary: oklch(92.37% 0.1959 130.23);
+	--color-secondary-content: oklch(22.09% 0.0176 279.88);
+	--color-accent: oklch(22.09% 0.0176 279.88);
+	--color-accent-content: oklch(92.37% 0.1959 130.23);
+	--color-neutral: oklch(27% 0.041 260.031);
+	--color-neutral-content: oklch(98% 0.003 247.858);
+	--color-info: oklch(70% 0.165 254.624);
+	--color-info-content: oklch(28% 0.091 267.935);
+	--color-success: oklch(79% 0.209 151.711);
+	--color-success-content: oklch(26% 0.065 152.934);
+	--color-warning: oklch(82% 0.189 84.429);
+	--color-warning-content: oklch(27% 0.077 45.635);
+	--color-error: oklch(71% 0.194 13.428);
+	--color-error-content: oklch(27% 0.105 12.094);
+	--radius-selector: 0.25rem;
+	--radius-field: 0.87rem;
+	--radius-box: 0.25rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+
+@plugin "daisyui/theme" {
+	name: "default-theme";
+    --radius-box: 2.81rem;
+    --radius-field:0.9rem;
+}
+
+.page-builder{
+    @apply flex flex-col gap-20
+}
+
+.btn{
+    @apply py-6 px-9 text-lg
+}
+
+h2{
+    @apply text-[40px] bg-secondary font-medium rounded-md px-2
+}
+
+section{
+    @apply px-24
+}
+
+p{
+    @apply text-lg
+}
+
+.collapse-plus {
+    > .collapse-title:after {
+        @apply size-6!
+    }
+}
+
+blockquote {
+    @apply border-l-6 border-secondary px-10
+}
+
+ul{
+    @apply list-disc pl-10
+}
+
+li{
+    @apply mt-1
+}

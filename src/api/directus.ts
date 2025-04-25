@@ -2,13 +2,8 @@ import { createDirectus, rest } from "@directus/sdk";
 import { readItems } from "@directus/sdk";
 import type { Page, PageInfoType } from "../types";
 
-const directus = createDirectus(
-	"https://gch-directus-production.up.railway.app"
-// "http://localhost:8056"
-).with(rest());
-
-
-
+const directus = createDirectus(import.meta.env.PUBLIC_DIRECTUS_URL).with(rest());
+console.log()
 const baseRelationship = {
 	fields: [
 		"slug",
@@ -18,7 +13,7 @@ const baseRelationship = {
 				"*",
 				{
 					item: {
-						hero: ["*", "image.filename_disk"],
+						hero_widget: ["*", "image.filename_disk"],
 						rich_text: ["*", "author.*", "author.photo.filename_disk"],
 						card_group: ["*", "cardgroup_cards.*", "cardgroup_cards.image.*"],
 						image_block: ["*"],

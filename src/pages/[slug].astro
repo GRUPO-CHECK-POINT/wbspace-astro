@@ -1,8 +1,8 @@
 ---
 import { getPages } from "../api/directus";
-import Layout from "./Layout.astro";
-import PageBuilder from "./PageBuilder.astro";
-import CustomWidget, { overrideWidgetList } from "./CustomWidgets.astro";
+import Layout from "../page-builder/Layout.astro";
+import PageBuilder from "../page-builder/PageBuilder.astro";
+import CustomWidget, { overrideWidgetList } from "../page-builder/CustomWidgets.astro";
 
 export async function getStaticPaths() {
     try {
