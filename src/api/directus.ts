@@ -2,58 +2,18 @@ import { createDirectus, rest } from "@directus/sdk";
 import { readItems } from "@directus/sdk";
 import type { Page, PageInfoType } from "../types";
 
-const directus = createDirectus(import.meta.env.PUBLIC_DIRECTUS_URL).with(rest());
-console.log()
+const directus = createDirectus(import.meta.env.PUBLIC_DIRECTUS_URL).with(
+	rest(),
+);
+console.log();
 const baseRelationship = {
-	fields: [
-		"slug",
-		"title",
-		{
-			blocks: [
-				"*",
-				{
-					item: {
-						hero_widget: ["*", "image.filename_disk"],
-						rich_text: ["*", "author.*", "author.photo.filename_disk"],
-						card_group: ["*", "cardgroup_cards.*", "cardgroup_cards.image.*"],
-						image_block: ["*"],
-						image_collection: ["*", "images.directus_files_id.filename_disk"],
-						separator_block: ["*", "image.filename_disk"],
-						grid_widget: ["*", "items.grid_widget_items_id.*"],
-						custom_widget: ["*", "collections.item.*.*"],
-						contact_form: ["*", "image.filename_disk"],
-						footer: [
-							"*",
-							"page_info.logo_light.filename_disk",
-							"page_info.logo_dark.filename_disk",
-							"page_info.*",
-							"page_info.favicon.filename_disk",
-							"navigation_items.navigation_items_id.*",
-						],
-						navbar: [
-							"*",
-							"page_info.logo_light.filename_disk",
-							"page_info.logo_dark.filename_disk",
-							"page_info.*",
-							"page_info.favicon.filename_disk",
-							"navigation_items.navigation_items_id.*",
-						],
-						timeline_widget: [
-							"*",
-							"items.timeline_items_id.*",
-							"background_image.filename_disk",
-						],
-					},
-				},
-			],
-		},
-	],
+	fields: ["slug", "title"],
 };
 
 export const getPages = async (organizationId: string) => {
 	try {
 		const data = await directus.request<Page[]>(
-			readItems("Pages", {
+			readItems("pages", {
 				filter: {
 					organization_id: {
 						_eq: organizationId,
@@ -71,8 +31,11 @@ export const getPages = async (organizationId: string) => {
 
 export const getPage = async (organizationId: string, slug: string) => {
 	try {
+		if (!organizationId) {
+			throw new Error("Page not found");
+		}
 		const data = await directus.request<Page[]>(
-			readItems("Pages", {
+			readItems("pages", {
 				filter: {
 					slug: { _eq: slug },
 					organization_id: { _eq: organizationId },
@@ -91,7 +54,7 @@ export const getPage = async (organizationId: string, slug: string) => {
 	}
 };
 
-export const getSiteInfo = async (organizationId:string) => {
+export const getSiteInfo = async (organizationId: string) => {
 	const result = await directus.request<PageInfoType[]>(
 		readItems("page_info", {
 			filter: {

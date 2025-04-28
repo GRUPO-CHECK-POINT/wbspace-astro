@@ -1,8 +1,6 @@
 ---
 import { getPages } from "../api/directus";
 import Layout from "../page-builder/Layout.astro";
-import PageBuilder from "../page-builder/PageBuilder.astro";
-import CustomWidget, { overrideWidgetList } from "../page-builder/CustomWidgets.astro";
 
 export async function getStaticPaths() {
     try {
@@ -31,9 +29,5 @@ const page = Astro.props;
 ---
 
 <Layout title={page.title}>
-    <PageBuilder
-        page={page}
-        CustomWidgets={CustomWidget}
-        overrideWidgetList={overrideWidgetList}
-    />
+    <h1>Hola mundo desde ${page.title}</h1>
 </Layout>

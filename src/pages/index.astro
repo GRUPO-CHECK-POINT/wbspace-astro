@@ -1,18 +1,16 @@
 ---
 import Layout from "../page-builder/Layout.astro";
-import PageBuilder from "../page-builder/PageBuilder.astro";
 import { getPage } from "../api/directus";
-import CustomWidget, {
-	overrideWidgetList,
-} from "../page-builder/CustomWidgets.astro";
 
 const page = await getPage(import.meta.env.PUBLIC_ORGANIZATION_ID, "index");
 ---
 
-<Layout>
-	<PageBuilder
-		page={page}
-		CustomWidgets={CustomWidget}
-		overrideWidgetList={overrideWidgetList}
-	/>
-</Layout>
+{
+	page ? (
+		<Layout>
+			<h1>Hola mundo desde {page?.title}</h1>
+		</Layout>
+	) : (
+		<h1>Error! no se ha encontrado la página</h1>
+	)
+}
